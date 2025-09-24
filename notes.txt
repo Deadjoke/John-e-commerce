@@ -1,0 +1,183 @@
+how loading works in websites
+1)Loader is user for 2 main reasons
+1)data streaming 2)loading while data streaming
+how it work : it loads a chunk which is 500kb 0.5 megapyte it the data execed the chung storag it makes another one an start streaming
+
+2)lazy ,suspence
+const CatergoriesSlider = lazy(()=>{return import('./_components/CategoriesSlider/CatergoriesSlider')})
+  <Suspense fallback={<h1>Loading......</h1>}>
+  <CatergoriesSlider/>
+  </Suspense>
+  lazy is a react method that return promise asyn function 
+  and suspence is used to cover the compnent
+
+
+
+2) //server Action: is a feature created by react and consumed by next js
+// used to make any mutation operation from the client but will be handled on the server
+// Server Actions: 
+// A React feature adopted by Next.js to handle mutations (e.g., POST, PUT, DELETE).
+// They let you trigger these operations from the client,
+// but the logic runs securely on the server instead of exposing it in the client bundle.
+// This keeps sensitive data (endpoints, tokens, DB operations) safe and hidden.
+  
+
+
+cookies : isa astorgae type its size is 4kb and its duration is custominzable 
+one of its pros is that it can be accessed on the server and the client sides also can store it on the server 
+ex: so if called a post signup or login methods using 'use server' which is a server action that do the operation on server
+the returned token of this operation can be store on the server via cookie
+
+cookie is sent to the server on each request that is why it work on both server and client sides
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------login without next auth
+'use client'
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "_/components/ui/button";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "_/components/ui/form";
+import { Input } from "_/components/ui/input";
+import { useForm } from "react-hook-form";
+import { Loginschema } from "./login.schema";
+import { loginFormType } from "./login.types";
+import { handleLogin } from "./login.actions";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+
+export default function LoginForm() {
+  const router = useRouter()
+  const RHFObj =  useForm({
+    resolver:zodResolver(Loginschema),
+    defaultValues:{
+      email: "",
+      password: "",
+    }, 
+    mode:'onBlur'
+  });
+  const {handleSubmit, control} = RHFObj
+
+  async function  mySubmit(data:loginFormType){
+    // console.log(data);   
+    // the problem here is that we call this api on client side so the responce can be tracked in the network tab 
+    // and the network tab will contain all request info the endPoint where we sent the data to and that is bad bec 
+    // any outsider can know where the data is going to and the user token that the request returned
+    //  which mean he can do any operation using this token to our database using our endpoint
+
+
+
+    // old way before next auth 
+    // const resOutput =  await handleLogin(data)
+    // if (resOutput === true) {
+    //   toast.success('Loggedin Successfully', {position:'top-center',duration:2000,dismissible:true})
+    //   setTimeout(()=>  router.push('/'),1500 )
+    // }else{
+    //   toast.error(resOutput, {position:'top-center',duration:2000,dismissible:true})
+    // }
+  }
+  
+    return (
+<Form {...RHFObj} >
+  <form className="my-5" onSubmit={handleSubmit(mySubmit)}>
+
+
+
+  <FormField
+    control={control}
+    name="email"
+    render={({field}) => (
+      <FormItem>
+        <FormLabel>email:</FormLabel>
+        <FormControl>
+          <Input className="my-3" type="email" {...field} />
+        </FormControl>
+
+        <FormMessage />
+      </FormItem>
+    )}
+/>
+  <FormField
+    control={control}
+    name="password"
+    render={({field}) => (
+      <FormItem>
+        <FormLabel>Password:</FormLabel>
+        <FormControl>
+          <Input className="my-3" type="password" {...field} />
+        </FormControl>
+
+        <FormMessage />
+      </FormItem>
+    )}
+/>
+
+ <Button className="w-28 bg-green-500 block my-5">Login</Button>
+
+</form>
+</Form>
+  )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+middle ware---------------------------------------
+//function will be executed between of any page and the response of it
+
+import { getToken } from "next-auth/jwt";
+import { NextRequest, NextResponse } from "next/server";
+
+export default async function middleware(req : NextRequest) {
+  const jwt= await getToken({req});
+  console.log(jwt);
+  if (jwt?.credientailToken) {
+    return NextResponse.next();
+  }
+  
+ return NextResponse.redirect(`${process.env.MY_DOMAIN}/login`);
+}
+
+export const config = {
+    matcher:['/cart']
+}
