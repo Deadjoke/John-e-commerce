@@ -13,7 +13,8 @@ export async function GetUserCart():Promise<CartResponseType>{
       next:{tags:['getUserCard']}
     });
     const final = await res.json();
-    console.log('herofinal',final);
-    const {numOfCartItems,cartId,data:{products,totalCartPrice}} = final;
-    return {numOfCartItems,products,totalCartPrice,cartId};
+    // console.log('herofinal',final);
+    const {numOfCartItems,data:{products,totalCartPrice}} = final;
+
+    return {numOfCartItems,products,totalCartPrice}
 }

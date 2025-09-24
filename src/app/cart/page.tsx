@@ -8,7 +8,6 @@ import { GetUserCart } from '../_services/cart.services'
 import RemoveItemBtn from './RemoveItemBtn'
 import ChangeCountBtn from './ChangeCountBtn'
 import RemoveAllCart from './RemoveAllCart'
-import Link from 'next/link'
 
 
 
@@ -23,26 +22,24 @@ export default async function Cartpage() {
 
 
   const {numOfCartItems,products,totalCartPrice} =  await HandleGetUserCart()
-  // console.log("products", products.length);
+  console.log("products", products);
   
   return (
     <>
+    
       <div className="cart">
         <h1 className='text-center my-3 text-4xl text-red-500 font-bold'>User Cart</h1>
          
-    {products.length == 0 ? <h2 className='w-1/2 mx-auto text-3xl my-10 text-sky-500 font-bold'>Cart is Empty</h2>:
         <div className="w-3/4 flex justify-around mx-auto p-3  border-2 my-5 ">
           <div className="totals">
             <h2>You will Pay : <span className='text-blue-700 font-semibold'> {totalCartPrice} </span> L.E</h2>
             <h3>Number of Items: {numOfCartItems} </h3>
           </div>
           <div className="btns">
-            <Link href={'/cart/payment'}> <Button className='cursor-pointer me-2'>Pay</Button></Link>
+            <Button className='cursor-pointer me-2'>Pay</Button>
              <RemoveAllCart/>
           </div>
         </div>
-    
-    }
 
         <div className="w-3/4 mx-auto">
         <Table>

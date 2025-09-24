@@ -5,8 +5,8 @@ import Navbar from "./_components/Navbar/Navbar";
 import Footer from "./_components/Footer/Footer";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Toaster } from "_/components/ui/sonner";
+import { SessionProvider } from "next-auth/react";
 import MySessionProvider from "./_components/MySessionProvider/MySessionProvider";
-
 
 
 const geistSans = Geist({
