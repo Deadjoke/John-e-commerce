@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 import { CartContext } from '../MySessionProvider/CartContext';
 
 
-export default function AddProductBtn({w,pid}:{w:string,pid:string}) {
+export default function AddProductBtn({w,pid}:{w?:string,pid:string}) {
     const {updateCartCount} = useContext(CartContext);
     async function handleAddToCart(){
     const proCount =  await AddProductToCart(pid);

@@ -3,6 +3,7 @@ import { Table,  TableBody,TableCell,TableHead,TableHeader,TableRow,} from '_/co
 import React from 'react'
 import { showAllWishlistItems } from './wishlist.servies';
 import RemoveCartItem from './RemoveCartItem';
+import AddProductBtn from '../_components/AddProductBtn/AddProductBtn';
 
 
 export default async function page() {
@@ -12,8 +13,7 @@ export default async function page() {
     }
      
      const {count,data} =  await handleGetWishlist()
-    //  const arrayofProductsId = data.map(product=>product.id);
-    //  console.log("arrayofProductsId", arrayofProductsId);
+
      
   return (
     <>
@@ -47,6 +47,9 @@ export default async function page() {
            </TableCell>
            <TableCell>{product.category.name}</TableCell>
            <TableCell className="text-right">
+            <span className="me-2">
+              <AddProductBtn pid={product.id} />
+            </span>
               <RemoveCartItem id={product.id}/>
            </TableCell>
          </TableRow>
@@ -58,11 +61,3 @@ export default async function page() {
     </>
   )
 }
-        // {data.map(product=><div key={product.id} >
-        
-        
-        // </div>)}
-// product.title.split(' ',2).join(' ')
-        //    <h2>
-        //    {product.title} 
-        //    </h2> 

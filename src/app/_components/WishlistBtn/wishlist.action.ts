@@ -19,7 +19,6 @@ export type WishlistResponseType = {
         }
     })
     const finalRes = await res.json();
-    // console.log('finalwishlist',finalRes);
     if (finalRes.status === 'success') {
         revalidatePath('/wishlist');
         return {data: finalRes.data};
@@ -37,7 +36,6 @@ export async function removeFromWishlist(productId:string){
         }
     })
     const finalRes = await res.json();
-    console.log('finalremovewishlist',finalRes);
     if (finalRes.status === 'success') {
         revalidatePath('/wishlist');
         return true;
