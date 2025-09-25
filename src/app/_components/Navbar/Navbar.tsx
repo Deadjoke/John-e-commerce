@@ -50,7 +50,7 @@ return (
           <Link href="/" className={Mystyle}>Home</Link>
         </li>
         <li>
-          <Link href="/products" className={Mystyle}>Brands</Link>
+          <Link href="/brands" className={Mystyle}>Brands</Link>
         </li>
         <li>
           <Link href="/categories" className={Mystyle}>Categories</Link>
@@ -72,10 +72,11 @@ return (
         {isAuthenticated &&
         <>
         <li>
+          <Link href="/wishlist" className={Mystyle}>WishList</Link>
+        </li>
+        <li>
           <Link href="/cart" className={Mystyle}>Cart</Link>
         </li>
-            
-
 
         </> 
         }

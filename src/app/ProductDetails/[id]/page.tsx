@@ -1,4 +1,5 @@
 import AddProductBtn from '_/app/_components/AddProductBtn/AddProductBtn';
+import AddWishlistBtn from '_/app/_components/WishlistBtn/AddWishlist';
 import { getSpecifiedProduct } from '_/app/_services/product.services';
 import { Button } from '_/components/ui/button';
 import { log } from 'console';
@@ -20,7 +21,16 @@ export default async function ProductDetails({params}:ProductDetailsProps) {
       <div className="col-span-4 w-full md:col-span-3 p-4 md:w-3/4 mx-auto">
         <p>Brand: {product?.brand.name}</p>
         <h1 className='text-3xl md:text-5xl font-bold'>{product?.title}</h1>
-        <h3 className='text-sky-400 md:text-2xl my-2 md:my-4'>{product?.category.name}</h3>
+        <div className="wrapper flex justify-between items-center">
+        <div className="leftcat">
+         <h3 className='text-sky-400 md:text-2xl my-2 md:my-4'>{product?.category.name}</h3>
+        </div>
+        <div className="rightcat">
+          <div className="wishbtn">
+            <AddWishlistBtn pid={product.id}/>
+          </div>
+        </div>
+        </div>
         <p>{product?.description}</p>
         <div className="halfway flex justify-between my-3">
         <div className="left-side">

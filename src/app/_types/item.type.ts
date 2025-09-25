@@ -7,6 +7,7 @@ export type ItemType ={
   product:ProductType
 }
 export type CartResponseType = {
+    cartId?:string,
     numOfCartItems:number,
     products:ItemType[],
     totalCartPrice:number,

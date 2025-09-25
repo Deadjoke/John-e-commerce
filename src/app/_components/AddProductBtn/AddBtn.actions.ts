@@ -1,7 +1,6 @@
 'use server'
 
 import getUserToken from "_/utils/utils"
-import { count } from "console";
 import { revalidatePath, revalidateTag } from "next/cache";
 
 export async function AddProductToCart(productId:string){
@@ -61,7 +60,7 @@ export async function changeCount(id:string,count:number){
     body:JSON.stringify({count})
  })
  const final = await res.json();
- console.log("Changefinalres",final);
+//  console.log("Changefinalres",final);
  if (final.status === 'success') {
     revalidatePath('/cart');
     return final.numOfCartItems;

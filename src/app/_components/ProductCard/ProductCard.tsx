@@ -2,6 +2,7 @@ import React from 'react'
 import { ProductCardProps } from './ProductCard.types';
 import Link from 'next/link';
 import AddProductBtn from '../AddProductBtn/AddProductBtn';
+import AddWishlistBtn from '../WishlistBtn/AddWishlist';
 
 
 export default function ProductCard({product}:ProductCardProps) {
@@ -25,8 +26,11 @@ export default function ProductCard({product}:ProductCardProps) {
         <i className="fa-solid fa-star text-yellow-400"></i>
         <span>{product.ratingsAverage}</span>
        </div>
-      </div> 
+      </div>
 </Link>
+      <div className="wishbtn">
+        <AddWishlistBtn pid={product.id}/>
+      </div> 
       <div className="md:opacity-0 md:transition md:duration-500 md:group-hover:opacity-100">
       <AddProductBtn pid={product.id} w={'w-full'}/>
       </div>
