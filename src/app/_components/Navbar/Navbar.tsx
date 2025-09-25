@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { GetUserCart } from '_/app/_services/cart.services';
 import { CartContext } from '../MySessionProvider/CartContext';
 
-let Mystyle = "block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"; 
+const Mystyle = "block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"; 
 
 export default function Navbar() {
   const [initialCartCount,setCartCount] = useState(0);
